@@ -33,10 +33,34 @@ await Check("per-row-network-expression-failure-continue",async()=>{
  Assert(!rows[0].Success&&rows[0].ErrorCode==2&&!rows[1].Success&&rows[2].Success&&rows[2].Value=="30","Row failures stopped next read or leaked stale value");
  Assert(rows[0].Value==""&&rows[0].NumericValue==null,"Error replaced by stale/zero sample");
 });
+await Check("tag-write-scalar-array-bool-string-byte",async()=>{
+ await service.WriteTagAsync(new("word","300","ushort"),"321");
+ await service.WriteTagAsync(new("coils","100","bool",3),"[1,0,1]");
+ await service.WriteTagAsync(new("text","200","string",4,"ASCII"),"ABCD");
+ await service.WriteTagAsync(new("byte","212","byte"),"123");
+ var rows=await service.ReadTableAsync([
+  new("word","300","ushort"),new("coils","100","bool",3),
+  new("text","200","string",4,"ASCII"),new("byte","212","byte")]);
+ Assert(rows.All(r=>r.Success),"Tag write/readback failed");
+ Assert(rows[0].NumericValue==321&&rows[1].Value=="[True, False, True]","Scalar/array tag write mismatch");
+ Assert(rows[2].Value.TrimEnd('\0')=="ABCD"&&rows[3].Value=="0",$"String/byte tag write mismatch: {Escape(rows[2].Value)} | {Escape(rows[3].Value)}");
+ Assert((await service.ReadBatchAsync("212",1,"Hex")).StartsWith("00 7B"),"Byte value was not written to the Modbus word");
+});
 await Check("batch-line-width-and-format-reparse",async()=>{
+ await service.ReadBatchAsync("100",121,"Hex");
  var text=await service.RenderBatchAsync("Byte",false,3);
  Assert(text.Split(Environment.NewLine).Length==81,"Byte line width mismatch");
  Assert((await service.RenderBatchAsync("Hex",false,8)).Contains(Environment.NewLine),"Hex line width mismatch");
+});
+await Check("batch-parse-index-length-value-and-code",async()=>{
+ await service.ReadBatchAsync("100",121,"Hex");
+ var rows=await service.ParseBatchAsync([
+  new("scalar","ushort","",0),
+  new("raw","byte","2",0),
+  new("dynamic","byte","[0]",4),
+  new("broken","int","",999)]);
+ Assert(rows[0].Success&&rows[0].Code.Contains("TransUInt16")&&rows[1].Value=="00 0A"&&rows[2].Value=="0",$"Batch parse value mismatch: {rows[0].Value} | {rows[1].Value} | {rows[2].Value}");
+ Assert(!rows[3].Success&&rows[3].Error.Contains("超出"),"Bad parse row stopped or hid error");
 });
 await Check("ascii-utf8-string-no-numeric-plot",async()=>{
  await service.WriteBatchAsync("200","Hex","41 42 43 44");
@@ -83,14 +107,23 @@ await Check("bounded-history-failure-timestamp-csv-escaping",()=>{
  var samples=buffer.Get("a");Assert(samples.Count==3&&samples[0].Timestamp==DateTimeOffset.UnixEpoch.AddSeconds(2)&&!samples[1].Success&&samples[1].NumericValue==null,"Retention/failure mismatch");
  var csv=buffer.ToCsv();Assert(csv.Contains("\"a,\"\"quoted\"")&&csv.Contains("1970-01-01T00:00:04")&&csv.Contains("failure"),"CSV escaping or timestamp lost");buffer.Clear();Assert(buffer.Get("a").Count==0,"Clear failed");return Task.CompletedTask;
 });
+await Check("long-run-4000-round-retention",()=>{
+ var buffer=new TrendBuffer();var tag=new TagDefinition("long-run","100","ushort");var start=DateTimeOffset.UnixEpoch;
+ for(var index=0;index<5000;index++)buffer.Add("long-run",new(tag,start.AddMilliseconds(index),index.ToString(),index));
+ var samples=buffer.Get("long-run");
+ Assert(samples.Count==4000&&samples[0].NumericValue==1000&&samples[^1].NumericValue==4999,"Long-run retention mismatch");
+ return Task.CompletedTask;
+});
 await Check("multi-curve-aligned-failure-gap",()=>{
  var left=new TagDefinition("left","100","ushort");var right=new TagDefinition("right","101","ushort");
  var aligned=new TrendBuffer();var first=DateTimeOffset.UnixEpoch;var second=first.AddSeconds(1);
  aligned.Add("left",new(left,first,"10",10));aligned.Add("left",new(left,second,"",null,2,"failure"));
  aligned.Add("right",new(right,first,"20",20));aligned.Add("right",new(right,second,"30",30));
+ aligned.Add("left",new(left,first.AddSeconds(10),"40",40));aligned.Add("right",new(right,first.AddSeconds(10),"50",50));
  var frames=aligned.GetFrames(["left","right"]);
- Assert(aligned.Capacity==4000&&frames.Count==2&&frames[1].Values["left"]==null&&frames[1].Values["right"]==30,"Aligned curve frame mismatch");
- Assert(aligned.GetCompleteFrames(["left","right"]).Count==1,"Failed curve round must be excluded");
+ Assert(aligned.Capacity==4000&&frames.Count==3&&frames[1].Values["left"]==null&&frames[1].Values["right"]==30,"Aligned curve frame mismatch");
+ Assert(aligned.GetCompleteFrames(["left","right"]).Count==2,"Failed curve round must be excluded");
+ Assert(aligned.GetCompleteFrames(["left","right"],TimeSpan.FromSeconds(5)).Single().Timestamp==first.AddSeconds(10),"Curve time window mismatch");
  return Task.CompletedTask;
 });
 await service.DisconnectAsync();

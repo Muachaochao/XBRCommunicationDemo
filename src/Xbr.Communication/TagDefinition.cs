@@ -51,6 +51,11 @@ public sealed record TableDefinition(IReadOnlyList<TagDefinition> Tags,int Inter
 
 // Explicit bounded retention, including failed samples. Failure is never replaced by zero.
 public sealed record TrendFrame(DateTimeOffset Timestamp,IReadOnlyDictionary<string,double?> Values);
+public sealed record BatchParseDefinition(string Name,string Type,string Length,int ByteIndex);
+public sealed record BatchParseResult(string Name,string Type,string Value,string Code,string Error="")
+{
+    public bool Success=>string.IsNullOrEmpty(Error);
+}
 
 public sealed class TrendBuffer(int capacity=4000)
 {
@@ -71,9 +76,12 @@ public sealed class TrendBuffer(int capacity=4000)
             return new TrendFrame(timestamp,values);
         }).ToArray();
     }
-    public IReadOnlyList<TrendFrame> GetCompleteFrames(IEnumerable<string> ids){
+    public IReadOnlyList<TrendFrame> GetCompleteFrames(IEnumerable<string> ids,TimeSpan? window=null){
         var selected=ids.Distinct().ToArray();
-        return GetFrames(selected).Where(frame=>selected.All(id=>frame.Values[id].HasValue)).ToArray();
+        var frames=GetFrames(selected).Where(frame=>selected.All(id=>frame.Values[id].HasValue)).ToArray();
+        if(!window.HasValue||frames.Length==0)return frames;
+        var cutoff=frames[^1].Timestamp-window.Value;
+        return frames.Where(frame=>frame.Timestamp>=cutoff).ToArray();
     }
     public void Clear()=>samples.Clear();
     public string ToCsv(){

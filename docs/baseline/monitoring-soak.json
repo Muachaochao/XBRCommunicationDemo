@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "startedAt": "2026-11-17T17:30:16.0023904+08:00",
+  "endedAt": "2026-11-17T17:30:26.2005359+08:00",
+  "durationSeconds": 10,
+  "connectionCount": 10,
+  "tagCount": 20,
+  "intervalMs": 500,
+  "rounds": [
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+  ],
+  "totalRounds": 200,
+  "totalRequests": 4000,
+  "failures": [],
+  "latencyMs": {
+    "min": 1.7475,
+    "p50": 3.1336,
+    "p95": 11.1046,
+    "max": 81.9387
+  },
+  "process": {
+    "privateMemoryMb": 33.94921875,
+    "workingSetMb": 65.2578125,
+    "managedMemoryMb": 8.187126159667969,
+    "threadCount": 40,
+    "cpuMs": 1890.625
+  }
+}

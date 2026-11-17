@@ -70,3 +70,7 @@ Arc 三个标签完成 Skia 渲染检查，状态检查通过；最终构建 0 �
 第四轮：批量读取、官方 DataTableItem 点表和 Arc 多曲线接入。12 项监控集成场景通过，覆盖 121 字分包、显示反转不污染缓存、批量写回读、行宽重解析、混合标量/数组/表达式、Bool/Byte、单轮共享时间戳、逐行失败继续、字符串字长度、官方 XML 往返、未知字段保留、取消、连接锁、4000 轮历史、失败间隔和 CSV 转义。证据：baseline/monitoring-integration.json。
 Avalonia 桌面构建 0 错误、0 警告；DesktopSmoke 在 Skia 路径渲染批量读取、数据表和双曲线，并断言 2 条 `ChartSeries` 已挂载。截图：baseline/screenshots/arc-batch-read.png、arc-data-table.png、arc-live-curve.png。
 剩余差异：原版批量解析子表、正则/文本搜索、表格值双击写入、曲线颜色/线型/时间窗与完整 EXE 交互尚未迁移；因此阶段 D/E/F 仍未通过。
+
+第五轮：批量解析子表、正则/文本搜索、解析代码示例、数据表双击写入回读、曲线颜色/虚线/平滑/线宽/时间窗已迁移。监控集成扩展到 15 项并全部通过；新增 5000 轮截断、批量解析值/代码和多种表格写值场景。证据仍为 baseline/monitoring-integration.json。
+新增 `MonitoringSoak`：10 连接 × 20 点位 × 500ms 运行 10 秒，完成 200 轮、4000 请求、0 失败，P95 11.10ms，进程工作集约 65.3MB，结果见 baseline/monitoring-soak.json。
+DesktopSmoke 增加批量解析/搜索/代码与曲线样式状态，并输出最小 1000×700、扩展 1600×1000 两种布局截图。短时压力与两种布局不能替代 8 小时稳定性以及 Windows 100%/125%/150%/200% DPI 实机验收；原版 EXE 同步交互和真实 Modbus TCP 设备仍需外部环境。

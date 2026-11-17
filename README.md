@@ -12,8 +12,10 @@
 - 类型化读写、原始报文、只读轮询、有限日志、单设备明文 XML 配置。
 - FC23 读写寄存器，Word/Bool 站号搜索、匹配即停和取消。
 - 批量读写的 12 种显示/写入格式、按字反转、每行数量和缓存重解析。
+- 官方同构批量解析子表、正则/文本查找定位和 C# 解析代码示例。
 - 官方 `DataTableItem` XML、混合标量/数组/表达式、失败行继续、六种字符串编码和 CSV 历史。
-- Arc 多曲线、共享轮次时间戳、失败不补零；12 项监控集成和 23 项协议矩阵限定测试通过。
+- 数据表当前值双击写入并回读；Arc 多曲线颜色、虚线、平滑/直线、线宽和时间窗。
+- 15 项监控集成、23 项协议矩阵和 10 连接 × 20 点位 × 500ms 压力探针通过。
 
 **迁移进行中，尚未实现原版全部页面和功能，也未完成真机验收。**
 
@@ -32,6 +34,7 @@ dotnet run --project src/Xbr.Desktop
 dotnet build probes/LegacyModbus
 dotnet run --project probes/ModbusMatrix
 dotnet run --project probes/MonitoringIntegration
+dotnet run --project probes/MonitoringSoak -- 10 10 20 500
 dotnet run --project probes/DesktopSmoke
 ```
 

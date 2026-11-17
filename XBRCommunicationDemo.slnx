@@ -4,6 +4,7 @@
     <Project Path="probes/LegacyModbus/LegacyModbus.csproj" />
     <Project Path="probes/ModbusMatrix/ModbusMatrix.csproj" />
     <Project Path="probes/MonitoringIntegration/MonitoringIntegration.csproj" />
+    <Project Path="probes/MonitoringSoak/MonitoringSoak.csproj" />
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/Xbr.Communication/Xbr.Communication.csproj" />

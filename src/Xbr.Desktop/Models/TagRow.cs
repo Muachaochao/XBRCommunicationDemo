@@ -18,6 +18,8 @@ public partial class TagRow:ObservableObject
     [ObservableProperty] private string lastUpdated="";
     [ObservableProperty] private string error="";
     [ObservableProperty] private bool isPlotted;
+    [ObservableProperty] private string curveColor="#4EA1F7";
+    [ObservableProperty] private bool curveDashed;
     public TagDefinition Definition(){
         var tag=new TagDefinition(Name,Address,DataTypeCode.Trim().ToLowerInvariant(),string.IsNullOrWhiteSpace(Length)?-1:int.Parse(Length),Encoding,Expression,Unit,Description);tag.Validate();return tag;
     }
