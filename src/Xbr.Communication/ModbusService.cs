@@ -7,7 +7,7 @@ using System.Text;
 namespace Xbr.Communication;
 
 // Serializes all operations, including disconnect, on a single connection.
-public sealed class ModbusService
+public sealed partial class ModbusService
 {
     private readonly SemaphoreSlim gate = new(1);
     private ModbusTcpNet? client;

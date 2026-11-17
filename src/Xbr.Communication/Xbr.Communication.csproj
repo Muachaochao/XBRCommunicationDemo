@@ -6,5 +6,9 @@
     <Nullable>enable</Nullable>
   <UseWindowsForms>true</UseWindowsForms></PropertyGroup>
 
-<ItemGroup><Reference Include="HslCommunication"><HintPath>$(HslReferenceDirectory)\HslCommunication.dll</HintPath></Reference><Reference Include="Newtonsoft.Json"><HintPath>$(HslReferenceDirectory)\Newtonsoft.Json.dll</HintPath></Reference></ItemGroup></Project>
+<ItemGroup><Reference Include="HslCommunication"><HintPath>$(HslReferenceDirectory)\HslCommunication.dll</HintPath></Reference><Reference Include="Newtonsoft.Json"><HintPath>$(HslReferenceDirectory)\Newtonsoft.Json.dll</HintPath></Reference></ItemGroup>
+
+<ItemGroup>
+  <PackageReference Include="DynamicExpresso.Core" Version="2.19.5" />
+</ItemGroup></Project>
 

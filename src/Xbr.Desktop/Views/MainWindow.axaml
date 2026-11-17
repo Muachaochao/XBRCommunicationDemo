@@ -1,5 +1,6 @@
-<Window xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:arc="https://github.com/AIDotNet/TKCode.Arc" xmlns:vm="using:Xbr.Desktop.ViewModels" x:Class="Xbr.Desktop.Views.MainWindow" x:DataType="vm:MainViewModel" Title="XBR Communication Studio · Modbus TCP" Width="1240" Height="880" MinWidth="1000" MinHeight="700" Background="#101820" Foreground="#DBE4EA">
+<Window xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:arc="https://github.com/AIDotNet/TKCode.Arc" xmlns:models="using:Xbr.Desktop.Models" xmlns:vm="using:Xbr.Desktop.ViewModels" x:Class="Xbr.Desktop.Views.MainWindow" x:DataType="vm:MainViewModel" Title="XBR Communication Studio · Modbus TCP" Width="1240" Height="880" MinWidth="1000" MinHeight="700" Background="#101820" Foreground="#DBE4EA">
 <Window.Styles>
+<Style Selector="TabItem"><Setter Property="FontSize" Value="14"/><Setter Property="Padding" Value="10,8"/></Style>
 
 <Style Selector="TextBlock.caption"><Setter Property="Foreground" Value="#9DAFBC"/><Setter Property="FontSize" Value="12"/></Style>
 <Style Selector="Button"><Setter Property="Padding" Value="18,9"/></Style>
@@ -44,8 +45,44 @@
 <StackPanel Orientation="Horizontal" Spacing="10"><arc:Button Content="开始搜索" Command="{Binding SearchStationsCommand}" IsEnabled="{Binding CanOperate}"/><arc:Button Content="停止搜索" Command="{Binding StopSearchCommand}" IsEnabled="{Binding IsSearching}"/></StackPanel>
 <Grid ColumnDefinitions="*,*"><TextBox Text="{Binding SearchLog}" IsReadOnly="True" TextWrapping="Wrap" Height="130" Margin="0,0,10,0"/><TextBox Grid.Column="1" Text="{Binding SearchMatches}" IsReadOnly="True" TextWrapping="Wrap" Height="130"/></Grid>
 </StackPanel></TabItem>
+
+<TabItem Header="批量读取"><StackPanel Spacing="10" Margin="0,14">
+<Grid ColumnDefinitions="2*,*,*,*" IsEnabled="{Binding CanOperate}"><StackPanel Margin="0,0,10,0"><TextBlock Text="起始地址" Classes="caption"/><TextBox Text="{Binding BatchAddress}"/></StackPanel><StackPanel Grid.Column="1" Margin="0,0,10,0"><TextBlock Text="读取长度 / 字" Classes="caption"/><TextBox Text="{Binding BatchCount}"/></StackPanel><StackPanel Grid.Column="2" Margin="0,0,10,0"><TextBlock Text="显示 / 写入格式" Classes="caption"/><ComboBox ItemsSource="{Binding BatchDisplays}" SelectedItem="{Binding BatchDisplay}" HorizontalAlignment="Stretch"/></StackPanel><StackPanel Grid.Column="3"><TextBlock Text="每行数量（空 = 自动）" Classes="caption"/><TextBox Text="{Binding BatchLineCount}"/></StackPanel></Grid>
+<StackPanel Orientation="Horizontal" Spacing="10" IsEnabled="{Binding CanOperate}"><CheckBox Content="按字反转显示" IsChecked="{Binding BatchReverse}"/><arc:Button Content="批量读取" Command="{Binding ReadBatchCommand}"/><arc:Button Content="重新解析缓存" Command="{Binding RenderBatchCommand}"/><arc:Button Content="批量写入" Command="{Binding WriteBatchCommand}"/></StackPanel>
+<TextBlock Text="{Binding BatchInfo}" Classes="caption"/><TextBox Text="{Binding BatchContent}" AcceptsReturn="True" TextWrapping="Wrap" FontFamily="Consolas" Height="180"/>
+<TextBlock Text="修改格式、反转或每行数量只重新解析缓存；显示反转与行宽不改变写入字节；Bits 不支持反写。" Classes="caption"/>
+</StackPanel></TabItem>
+<TabItem Header="数据表"><StackPanel Spacing="10" Margin="0,14">
+<StackPanel Orientation="Horizontal" Spacing="8"><arc:Button Content="添加点位" Command="{Binding AddTagCommand}" IsEnabled="{Binding CanEditTable}"/><arc:Button Content="删除选中" Command="{Binding RemoveTagCommand}" IsEnabled="{Binding CanEditTable}"/><arc:Button Content="读取一轮" Command="{Binding ReadTableCommand}" IsEnabled="{Binding CanOperate}"/><arc:Button Content="开始采集" Command="{Binding StartTableCommand}" IsEnabled="{Binding CanOperate}"/><arc:Button Content="停止采集" Command="{Binding StopTableCommand}" IsEnabled="{Binding IsMonitoring}"/></StackPanel>
+<Grid ColumnDefinitions="Auto,90,Auto,90,*"><TextBlock Text="周期间隔 / ms" VerticalAlignment="Center" Classes="caption"/><TextBox Grid.Column="1" Text="{Binding TableInterval}" Margin="8,0" IsEnabled="{Binding CanEditTable}"/><TextBlock Grid.Column="2" Text="点间休眠 / ms" VerticalAlignment="Center" Classes="caption"/><TextBox Grid.Column="3" Text="{Binding TableSleep}" Margin="8,0" IsEnabled="{Binding CanEditTable}"/><TextBlock Grid.Column="4" Text="{Binding TableStatus}" VerticalAlignment="Center"/></Grid>
+<DataGrid x:Name="TagGrid" ItemsSource="{Binding Tags}" SelectedItem="{Binding SelectedTag}" AutoGenerateColumns="False" CanUserResizeColumns="True" Height="250" IsReadOnly="False" IsEnabled="{Binding CanEditTable}">
+<DataGrid.Columns>
+<DataGridTextColumn Header="名称" Binding="{Binding Name}" Width="100"/>
+<DataGridTextColumn Header="地址" Binding="{Binding Address}" Width="85"/>
+<DataGridTemplateColumn Header="类型" Width="90"><DataGridTemplateColumn.CellTemplate><DataTemplate x:DataType="models:TagRow"><ComboBox ItemsSource="{Binding AvailableTypes}" SelectedItem="{Binding DataTypeCode, Mode=TwoWay}"/></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
+<DataGridTextColumn Header="长度" Binding="{Binding Length}" Width="60"/>
+<DataGridTextColumn Header="当前值" Binding="{Binding Value}" Width="140" IsReadOnly="True"/>
+<DataGridTextColumn Header="单位" Binding="{Binding Unit}" Width="55"/>
+<DataGridTextColumn Header="表达式 x" Binding="{Binding Expression}" Width="100"/>
+<DataGridTemplateColumn Header="字符串编码" Width="105"><DataGridTemplateColumn.CellTemplate><DataTemplate x:DataType="models:TagRow"><ComboBox ItemsSource="{Binding AvailableEncodings}" SelectedItem="{Binding Encoding, Mode=TwoWay}"/></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
+<DataGridCheckBoxColumn Header="曲线" Binding="{Binding IsPlotted, Mode=TwoWay}" Width="50"/>
+<DataGridTextColumn Header="更新时间" Binding="{Binding LastUpdated}" Width="110" IsReadOnly="True"/>
+<DataGridTextColumn Header="错误" Binding="{Binding Error}" Width="180" IsReadOnly="True"/>
+<DataGridTextColumn Header="描述" Binding="{Binding Description}" Width="120"/>
+</DataGrid.Columns></DataGrid>
+<TextBlock Text="官方 DataTableItem 语义：长度空白读标量，正数读数组；字符串的 Length 是 HSL ReadString 的 Modbus 字长度。失败行继续下一项，数组和字符串不绘制曲线。" TextWrapping="Wrap" Classes="caption"/>
+<Grid ColumnDefinitions="*,Auto,Auto"><TextBox Text="{Binding TablePath}"/><arc:Button Grid.Column="1" Content="加载点表" Command="{Binding LoadTableCommand}" IsEnabled="{Binding CanEditTable}" Margin="8,0"/><arc:Button Grid.Column="2" Content="保存点表" Command="{Binding SaveTableCommand}"/></Grid>
+</StackPanel></TabItem>
+<TabItem Header="实时曲线"><StackPanel Spacing="10" Margin="0,14">
+<Grid ColumnDefinitions="*,Auto,Auto"><TextBlock Text="曲线选择与数据表联动，可同时显示多条成功标量曲线。" VerticalAlignment="Center" Classes="caption"/><arc:Button Grid.Column="1" Content="开始采集" Command="{Binding StartTableCommand}" IsEnabled="{Binding CanOperate}" Margin="8,0"/><arc:Button Grid.Column="2" Content="停止采集" Command="{Binding StopTableCommand}" IsEnabled="{Binding IsMonitoring}"/></Grid>
+<ItemsControl ItemsSource="{Binding Tags}"><ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate></ItemsControl.ItemsPanel><ItemsControl.ItemTemplate><DataTemplate x:DataType="models:TagRow"><CheckBox IsChecked="{Binding IsPlotted, Mode=TwoWay}" Margin="0,0,16,6"><TextBlock Text="{Binding Name}"/></CheckBox></DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
+<arc:LineChart x:Name="CurveChart" Label="{Binding CurveTitle}" ItemsSource="{Binding CurveCategories}" Height="300" ShowLegend="True" Curve="Linear"/>
+<TextBlock Text="{Binding CurveSummary}" TextWrapping="Wrap" Classes="caption"/>
+<TextBlock Text="只绘制成功标量；任一选中曲线失败时，该轮次会从曲线窗口剔除，不补零。数组/字符串不绘制；表格和 CSV 保留全部轮次与失败记录。" Classes="caption"/>
+<Grid ColumnDefinitions="*,Auto,Auto"><TextBox Text="{Binding HistoryPath}"/><arc:Button Grid.Column="1" Content="导出历史CSV" Command="{Binding ExportHistoryCommand}" Margin="8,0"/><arc:Button Grid.Column="2" Content="清空历史" Command="{Binding ClearHistoryCommand}" IsEnabled="{Binding CanEditTable}"/></Grid>
+</StackPanel></TabItem>
 </TabControl>
 <Border Background="#192630" CornerRadius="8" Padding="16"><StackPanel Spacing="8"><TextBlock Text="操作结果" Classes="caption"/><TextBox Text="{Binding Result}" IsReadOnly="True" TextWrapping="Wrap" FontFamily="Consolas" MinHeight="50"/><TextBlock Text="运行日志 · 最近 500 条" Classes="caption"/><ListBox ItemsSource="{Binding Logs}" Height="140" FontFamily="Consolas" FontSize="12"/></StackPanel></Border>
-</StackPanel></ScrollViewer><TextBlock Grid.Row="2" Grid.Column="1" Text="TCP / HSL 13.0.3    ·    UTF-8 字符串    ·    Windows 桌面" Classes="caption" Margin="26,8"/>
+</StackPanel></ScrollViewer><TextBlock Grid.Row="2" Grid.Column="1" Text="TCP / HSL 13.0.3    ·    ASCII / ANSI / UTF-8 / UTF-16 / GB2312    ·    Avalonia + Arc" Classes="caption" Margin="26,8"/>
 </Grid></Window>
 

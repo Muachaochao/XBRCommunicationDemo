@@ -63,6 +63,10 @@ Modbus 特殊功能、站号搜索、地址示例、代码示例及保存/恢复
 Avalonia 首次构建 0 错误、0 警告，默认窗口和读写标签已查看。默认参数与调用链见 MODBUS-TCP.md，首批 38 个场景见 baseline/modbus-cases.csv。
 未完成原版完整页面迁移、新旧动态报文对照、扩展子标签、异常/超时矩阵、缩放与长稳、真机验证；不能将本轮模拟器测试视为阶段 D/E/F 通过。
 
-第三轮：Arc 1.1.0 控件接入；FC23 与站号搜索实现。18 项场景通过，其中 16 项在旧 DLL/net481 API 与现代服务之间比较请求、响应、返回值/错误码，另 2 项覆盖扫描停止/取消和参数恢复。证据：baseline/modbus-matrix.json。
+第三轮：Arc 1.1.0 控件接入；FC23 与站号搜索实现。23 项场景通过，其中 21 项在旧 DLL/net481 API 与现代服务之间比较请求、响应、返回值/错误码，另 2 项覆盖扫描停止/取消和参数恢复。证据：baseline/modbus-matrix.json。
 Arc 三个标签完成 Skia 渲染检查，状态检查通过；最终构建 0 错误、0 警告。原包 14 文件哈希复核一致。
 这仍不替代原 EXE 交互、完整功能、真实设备、长稳及缩放验收。详见 MODBUS-TCP.md 第三轮章节。
+
+第四轮：批量读取、官方 DataTableItem 点表和 Arc 多曲线接入。12 项监控集成场景通过，覆盖 121 字分包、显示反转不污染缓存、批量写回读、行宽重解析、混合标量/数组/表达式、Bool/Byte、单轮共享时间戳、逐行失败继续、字符串字长度、官方 XML 往返、未知字段保留、取消、连接锁、4000 轮历史、失败间隔和 CSV 转义。证据：baseline/monitoring-integration.json。
+Avalonia 桌面构建 0 错误、0 警告；DesktopSmoke 在 Skia 路径渲染批量读取、数据表和双曲线，并断言 2 条 `ChartSeries` 已挂载。截图：baseline/screenshots/arc-batch-read.png、arc-data-table.png、arc-live-curve.png。
+剩余差异：原版批量解析子表、正则/文本搜索、表格值双击写入、曲线颜色/线型/时间窗与完整 EXE 交互尚未迁移；因此阶段 D/E/F 仍未通过。

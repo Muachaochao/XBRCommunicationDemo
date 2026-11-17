@@ -11,7 +11,9 @@
 - Modbus TCP 连接、站号、字节序、超时、广播与分批参数。
 - 类型化读写、原始报文、只读轮询、有限日志、单设备明文 XML 配置。
 - FC23 读写寄存器，Word/Bool 站号搜索、匹配即停和取消。
-- 18 项限定测试通过：异常/超时、数组、四种字节序、分包边界、线圈、FC23 和搜索恢复。
+- 批量读写的 12 种显示/写入格式、按字反转、每行数量和缓存重解析。
+- 官方 `DataTableItem` XML、混合标量/数组/表达式、失败行继续、六种字符串编码和 CSV 历史。
+- Arc 多曲线、共享轮次时间戳、失败不补零；12 项监控集成和 23 项协议矩阵限定测试通过。
 
 **迁移进行中，尚未实现原版全部页面和功能，也未完成真机验收。**
 
@@ -29,6 +31,7 @@ dotnet run --project src/Xbr.Desktop
 ```powershell
 dotnet build probes/LegacyModbus
 dotnet run --project probes/ModbusMatrix
+dotnet run --project probes/MonitoringIntegration
 dotnet run --project probes/DesktopSmoke
 ```
 
@@ -52,4 +55,4 @@ TKCode.Arc 的 MIT 许可及 notices 位于 [docs/third-party](docs/third-party)
 
 ## 下一步
 
-继续迁移批量读取、数据表、编码与数组表达式；补原版 EXE 同步骤交互对照，再逐项推进其他协议页面。
+先补批量解析面板、双击表格写值、曲线样式/时间窗和原版 EXE 同步骤交互对照；随后推进其他管道与协议页面。

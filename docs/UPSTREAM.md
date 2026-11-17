@@ -19,13 +19,14 @@ TKCode.Arc 为独立 MIT 组件，声明保存在 docs/third-party。
 | FC23 特殊功能 | HslCommunicationDemo/Modbus/ModbusControl.cs |
 | 站号搜索 | HslCommunicationDemo/Modbus/StationSearchControl.cs |
 | 普通读写、编码与数组表达式 | HslCommunicationDemo/DemoControl/UserControlReadWriteOp.cs |
-| 批量读（后续迁移） | HslCommunicationDemo/DemoControl/BatchReadControl.cs |
+| 批量读写、按字反转与行宽 | HslCommunicationDemo/DemoControl/BatchReadControl.cs |
+| 数据表、表达式、曲线与导出 | HslCommunicationDemo/DemoControl/DataTableControl.cs、DataTableItem.cs、FormCurveMonitor.cs |
 
 后续优先从上述官方源码迁移；此前反编译目录只在本地留作 v13.0.3 对照，不加入公开提交。
 本轮未改变已验证的 HSL 13.0.3 二进制依赖，避免切换版本造成行为漂移。依赖由使用者在本机提供，不新增上传通信 DLL、反编译源码、配置或授权信息。
 
 ## 当前完成与验收
 
-Arc 深色页面、基础类型读写、原始报文、轮询、单设备明文配置、FC23、站号搜索已接入。
-18 项限定自动场景通过；它们是旧 DLL 在 Framework 下的 API 对照与新服务测试，不等同于原版 EXE 全部按钮或真机验收。
-尚待：数据表、批量工具、曲线、导出、编码/数组表达式补全、其他管道与完整设备矩阵。
+Arc 深色页面、基础类型读写、原始报文、轮询、单设备明文配置、FC23、站号搜索、批量工具、数据表和多曲线已接入。
+23 项协议矩阵与 12 项监控集成场景通过；前者比较旧 DLL 请求/响应，后者覆盖表格、编码、取消、锁和曲线历史。二者都不等同于原版 EXE 全部按钮或真机验收。
+尚待：批量解析面板、表格双击写值、曲线样式/时间窗、导出格式扩展、其他管道与完整设备矩阵。
