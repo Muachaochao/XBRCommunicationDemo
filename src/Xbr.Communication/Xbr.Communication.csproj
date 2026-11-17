@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  <UseWindowsForms>true</UseWindowsForms></PropertyGroup>
+
+<ItemGroup><Reference Include="HslCommunication"><HintPath>$(HslReferenceDirectory)\HslCommunication.dll</HintPath></Reference><Reference Include="Newtonsoft.Json"><HintPath>$(HslReferenceDirectory)\Newtonsoft.Json.dll</HintPath></Reference></ItemGroup></Project>
+

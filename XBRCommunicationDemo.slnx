@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/probes/">
+    <Project Path="probes/DesktopSmoke/DesktopSmoke.csproj" />
+    <Project Path="probes/LegacyModbus/LegacyModbus.csproj" />
+    <Project Path="probes/ModbusMatrix/ModbusMatrix.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Xbr.Communication/Xbr.Communication.csproj" />
+    <Project Path="src/Xbr.Desktop/Xbr.Desktop.csproj" />
+  </Folder>
+</Solution>

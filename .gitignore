@@ -261,3 +261,11 @@ __pycache__/
 *.pyc
 /imgs/partner
 /------
+
+# Avalonia migration local-only artifacts
+.tools/
+artifacts/
+Directory.Build.local.props
+lib/hsl/
+reverse/
+*.log

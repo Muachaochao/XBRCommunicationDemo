@@ -1,0 +1,51 @@
+<Window xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:arc="https://github.com/AIDotNet/TKCode.Arc" xmlns:vm="using:Xbr.Desktop.ViewModels" x:Class="Xbr.Desktop.Views.MainWindow" x:DataType="vm:MainViewModel" Title="XBR Communication Studio · Modbus TCP" Width="1240" Height="880" MinWidth="1000" MinHeight="700" Background="#101820" Foreground="#DBE4EA">
+<Window.Styles>
+
+<Style Selector="TextBlock.caption"><Setter Property="Foreground" Value="#9DAFBC"/><Setter Property="FontSize" Value="12"/></Style>
+<Style Selector="Button"><Setter Property="Padding" Value="18,9"/></Style>
+</Window.Styles>
+<Grid ColumnDefinitions="180,*" RowDefinitions="80,*,36">
+<Border Grid.RowSpan="3" Background="#15222D" Padding="20,26"><StackPanel Spacing="18"><TextBlock Text="XBR" FontSize="28" FontWeight="Bold" Foreground="#59D5C6"/><TextBlock Text="COMMUNICATION STUDIO" FontSize="10"/><Border Height="1" Background="#30414D"/><TextBlock Text="协议工作台" Classes="caption"/><Border Background="#243E4A" Padding="12" CornerRadius="6"><TextBlock Text="Modbus TCP"/></Border><TextBlock Text="迁移验证版" Classes="caption" Margin="0,30,0,0"/><TextBlock Text="TKCode.Arc 组件&#10;功能逐项验收中。" TextWrapping="Wrap" Classes="caption"/></StackPanel></Border>
+<Grid Grid.Column="1" Margin="26,18" ColumnDefinitions="*,Auto"><StackPanel><TextBlock Text="Modbus TCP" FontSize="24" FontWeight="SemiBold"/><TextBlock Text="连接设备，调试寄存器与数据报文" Classes="caption"/></StackPanel><TextBlock Grid.Column="1" Text="{Binding Status}" Foreground="#59D5C6" VerticalAlignment="Center"/></Grid>
+<ScrollViewer Grid.Row="1" Grid.Column="1" Margin="26,0,26,10" HorizontalScrollBarVisibility="Disabled"><StackPanel Spacing="16">
+<Border Background="#192630" CornerRadius="8" Padding="18"><StackPanel Spacing="12"><TextBlock Text="01 / 连接参数" FontWeight="SemiBold"/>
+<StackPanel Spacing="10" IsEnabled="{Binding CanEditConnection}">
+<Grid ColumnDefinitions="2*,*,*,*,*">
+<StackPanel Margin="0,0,10,0"><TextBlock Text="主机地址" Classes="caption"/><TextBox Text="{Binding Host}"/></StackPanel>
+<StackPanel Grid.Column="1" Margin="0,0,10,0"><TextBlock Text="端口" Classes="caption"/><TextBox Text="{Binding Port}"/></StackPanel>
+<StackPanel Grid.Column="2" Margin="0,0,10,0"><TextBlock Text="站号" Classes="caption"/><TextBox Text="{Binding Station}"/></StackPanel>
+<StackPanel Grid.Column="3" Margin="0,0,10,0"><TextBlock Text="连接超时 / ms" Classes="caption"/><TextBox Text="{Binding ConnectTimeout}"/></StackPanel>
+<StackPanel Grid.Column="4"><TextBlock Text="接收超时 / ms" Classes="caption"/><TextBox Text="{Binding ReceiveTimeout}"/></StackPanel></Grid>
+<Grid ColumnDefinitions="*,*,*"><StackPanel Margin="0,0,10,0"><TextBlock Text="字节序" Classes="caption"/><ComboBox ItemsSource="{Binding Formats}" SelectedIndex="{Binding FormatIndex}" HorizontalAlignment="Stretch"/></StackPanel><StackPanel Grid.Column="1" Margin="0,0,10,0"><TextBlock Text="广播站号（空 = 禁用）" Classes="caption"/><TextBox Text="{Binding Broadcast}"/></StackPanel><StackPanel Grid.Column="2"><TextBlock Text="字分批长度（空 = 120）" Classes="caption"/><TextBox Text="{Binding BatchLength}"/></StackPanel></Grid>
+<WrapPanel><CheckBox Content="地址从 0 开始" IsChecked="{Binding AddressZero}" Margin="0,0,16,0"/><CheckBox Content="字符串反转" IsChecked="{Binding StringReverse}" Margin="0,0,16,0"/><CheckBox Content="检查消息号" IsChecked="{Binding MessageCheck}" Margin="0,0,16,0"/><CheckBox Content="检查站号" IsChecked="{Binding StationCheck}" Margin="0,0,16,0"/><CheckBox Content="禁用功能码 06" IsChecked="{Binding Disable06}"/></WrapPanel></StackPanel>
+<StackPanel Orientation="Horizontal" Spacing="10"><arc:Button Content="连接设备" Command="{Binding ConnectCommand}" IsEnabled="{Binding CanEditConnection}" Background="#257F78"/><arc:Button Content="断开连接" Command="{Binding DisconnectCommand}" IsEnabled="{Binding CanDisconnect}"/></StackPanel></StackPanel></Border>
+<TabControl x:Name="WorkspaceTabs" SelectedIndex="0">
+<TabItem Header="寄存器读写"><StackPanel Spacing="12" Margin="0,14"><Grid ColumnDefinitions="2*,*,*" IsEnabled="{Binding CanOperate}"><StackPanel Margin="0,0,10,0"><TextBlock Text="地址" Classes="caption"/><TextBox Text="{Binding Address}"/></StackPanel><StackPanel Grid.Column="1" Margin="0,0,10,0"><TextBlock Text="数据类型" Classes="caption"/><ComboBox ItemsSource="{Binding Types}" SelectedItem="{Binding DataType}" HorizontalAlignment="Stretch"/></StackPanel><StackPanel Grid.Column="2"><TextBlock Text="读取数量 / 字符串字节长度" Classes="caption"/><TextBox Text="{Binding Length}"/></StackPanel></Grid>
+<Grid ColumnDefinitions="Auto,*,Auto" IsEnabled="{Binding CanOperate}"><arc:Button Content="读取" Command="{Binding ReadCommand}"/><TextBox Grid.Column="1" Text="{Binding WriteValue}" Margin="10,0" PlaceholderText="值或逗号分隔数组；字符串使用 UTF-8"/><arc:Button Grid.Column="2" Content="写入" Command="{Binding WriteCommand}"/></Grid>
+<StackPanel Orientation="Horizontal" Spacing="10"><TextBox Text="{Binding Interval}" Width="100" IsEnabled="{Binding CanOperate}"/><TextBlock Text="ms" VerticalAlignment="Center"/><arc:Button Content="开始轮询" Command="{Binding StartPollingCommand}" IsEnabled="{Binding CanOperate}"/><arc:Button Content="停止轮询" Command="{Binding StopPollingCommand}" IsEnabled="{Binding IsPolling}"/></StackPanel></StackPanel></TabItem>
+<TabItem Header="原始报文"><StackPanel Spacing="12" Margin="0,14" IsEnabled="{Binding CanOperate}"><TextBlock Text="Hex 请求；完整报文模式需要包含 MBAP 头。" Classes="caption"/><TextBox Text="{Binding RawHex}"/><CheckBox Content="Modbus Core：由库添加协议头" IsChecked="{Binding CoreMessage}"/><arc:Button Content="发送报文" Command="{Binding SendRawCommand}"/></StackPanel></TabItem>
+<TabItem Header="连接配置"><StackPanel Spacing="12" Margin="0,14"><TextBlock Text="单设备明文 XML；保存前自动备份已有文件。" Classes="caption"/><TextBox Text="{Binding ConfigPath}"/><StackPanel Orientation="Horizontal" Spacing="10"><arc:Button Content="加载配置" Command="{Binding LoadConfigCommand}" IsEnabled="{Binding CanEditConnection}"/><arc:Button Content="保存配置" Command="{Binding SaveConfigCommand}"/></StackPanel></StackPanel></TabItem>
+
+<TabItem Header="特殊功能 · FC23"><StackPanel Spacing="10" Margin="0,14" IsEnabled="{Binding CanOperate}">
+<TextBlock Text="一次请求读写多个保持寄存器；写入值为 Hex 字节。" Classes="caption"/>
+<Grid ColumnDefinitions="*,*,*"><StackPanel Margin="0,0,10,0"><TextBlock Text="读取地址" Classes="caption"/><TextBox Text="{Binding SpecialReadAddress}"/></StackPanel><StackPanel Grid.Column="1" Margin="0,0,10,0"><TextBlock Text="读取长度 / 字" Classes="caption"/><TextBox Text="{Binding SpecialReadLength}"/></StackPanel><StackPanel Grid.Column="2"><TextBlock Text="写入地址" Classes="caption"/><TextBox Text="{Binding SpecialWriteAddress}"/></StackPanel></Grid>
+<TextBox Text="{Binding SpecialWriteHex}" PlaceholderText="写入值，例如 00 01 00 02"/>
+<arc:Button Content="读写寄存器（功能码 23）" Command="{Binding ReadWriteCommand}"/>
+<TextBox Text="{Binding SpecialCode}" IsReadOnly="True" TextWrapping="Wrap"/>
+</StackPanel></TabItem>
+<TabItem Header="站号搜索"><StackPanel Spacing="10" Margin="0,14">
+<Grid ColumnDefinitions="*,*,*,*,*" IsEnabled="{Binding CanOperate}">
+<StackPanel Margin="0,0,10,0"><TextBlock Text="起始站号" Classes="caption"/><TextBox Text="{Binding SearchStart}"/></StackPanel>
+<StackPanel Grid.Column="1" Margin="0,0,10,0"><TextBlock Text="终止站号" Classes="caption"/><TextBox Text="{Binding SearchEnd}"/></StackPanel>
+<StackPanel Grid.Column="2" Margin="0,0,10,0"><TextBlock Text="接收超时 / ms" Classes="caption"/><TextBox Text="{Binding SearchTimeout}"/></StackPanel>
+<StackPanel Grid.Column="3" Margin="0,0,10,0"><TextBlock Text="读取地址" Classes="caption"/><TextBox Text="{Binding SearchAddress}"/></StackPanel>
+<StackPanel Grid.Column="4"><TextBlock Text="读取长度" Classes="caption"/><TextBox Text="{Binding SearchLength}"/></StackPanel></Grid>
+<StackPanel Orientation="Horizontal" Spacing="16" IsEnabled="{Binding CanOperate}"><CheckBox Content="Word 读取（关闭时读 Bool）" IsChecked="{Binding SearchWord}"/><CheckBox Content="匹配即停止" IsChecked="{Binding StopOnMatch}"/></StackPanel>
+<StackPanel Orientation="Horizontal" Spacing="10"><arc:Button Content="开始搜索" Command="{Binding SearchStationsCommand}" IsEnabled="{Binding CanOperate}"/><arc:Button Content="停止搜索" Command="{Binding StopSearchCommand}" IsEnabled="{Binding IsSearching}"/></StackPanel>
+<Grid ColumnDefinitions="*,*"><TextBox Text="{Binding SearchLog}" IsReadOnly="True" TextWrapping="Wrap" Height="130" Margin="0,0,10,0"/><TextBox Grid.Column="1" Text="{Binding SearchMatches}" IsReadOnly="True" TextWrapping="Wrap" Height="130"/></Grid>
+</StackPanel></TabItem>
+</TabControl>
+<Border Background="#192630" CornerRadius="8" Padding="16"><StackPanel Spacing="8"><TextBlock Text="操作结果" Classes="caption"/><TextBox Text="{Binding Result}" IsReadOnly="True" TextWrapping="Wrap" FontFamily="Consolas" MinHeight="50"/><TextBlock Text="运行日志 · 最近 500 条" Classes="caption"/><ListBox ItemsSource="{Binding Logs}" Height="140" FontFamily="Consolas" FontSize="12"/></StackPanel></Border>
+</StackPanel></ScrollViewer><TextBlock Grid.Row="2" Grid.Column="1" Text="TCP / HSL 13.0.3    ·    UTF-8 字符串    ·    Windows 桌面" Classes="caption" Margin="26,8"/>
+</Grid></Window>
+

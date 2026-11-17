@@ -1,0 +1,39 @@
+﻿ID,功能,输入/步骤,预期,当前状态,原版证据,新版证据
+MB-001,默认值,新建页面,参数按 MODBUS-TCP.md 表逐项一致,待新旧UI动态对照,待采集,待采集
+MB-002,连接,本机模拟器,连接成功，读写启用,服务测试通过,待采集,service-integration.log（仅标记通过项）
+MB-003,读取UInt16,100，1；初值1234,FC03请求 010300640001，值1234,服务测试通过,待采集,service-integration.log（仅标记通过项）
+MB-004,标量写UInt16,100，4321,默认FC06，回读4321,服务测试通过,待采集,service-integration.log（仅标记通过项）
+MB-005,数组写UInt16,100，[4321],FC16，回读4321,Framework API 与新服务对照通过（限定报告场景）,modbus-matrix.json：原 DLL / net481 API，非 EXE 按钮,modbus-matrix.json
+MB-006,Core报文,01 03 00 64 00 01,请求自动封装，返回10E1,服务测试通过,待采集,service-integration.log（仅标记通过项）
+MB-007,完整帧,带MBAP的FC03,不二次加头，返回完整响应,待测,待采集,待采集
+MB-008,配置往返,单设备明文XML+未知字段,字段一致，未知字段保留,服务测试通过,待采集,service-integration.log（仅标记通过项）
+MB-009,断开后读,断开后读取100,拒绝发送请求,服务测试通过,待采集,service-integration.log（仅标记通过项）
+MB-010,端口拒绝,关闭的本机端口,超时内报告失败，允许重试,待测,待采集,待采集
+MB-011,超时,接收后不应答,报告超时，UI保持响应,Framework API 与新服务对照通过（限定报告场景）,modbus-matrix.json：原 DLL / net481 API，非 EXE 按钮,modbus-matrix.json
+MB-012,消息号校验,返回错误事务ID,与原版错误一致,待测,待采集,待采集
+MB-013,站号校验,错误站号及关闭校验,与原版接受/拒绝行为一致,待测,待采集,待采集
+MB-014,异常响应,FC83+02,错误码和信息与原版一致,Framework API 与新服务对照通过（限定报告场景）,modbus-matrix.json：原 DLL / net481 API，非 EXE 按钮,modbus-matrix.json
+MB-015,地址基准,0/1模式读取同一数据,线上地址偏移与原版一致,待测,待采集,待采集
+MB-016,分批边界,119/120/121/240字,请求分包和拼接一致,Framework API 与新服务对照通过（限定报告场景）,modbus-matrix.json：原 DLL / net481 API，非 EXE 按钮,modbus-matrix.json
+MB-017,广播,广播站号匹配,原版不等待响应的行为一致,待测,待采集,待采集
+MB-018,禁用06,标量写入且禁用06,转16功能码，读回一致,Framework API 与新服务对照通过（限定报告场景）,modbus-matrix.json：原 DLL / net481 API，非 EXE 按钮,modbus-matrix.json
+MB-019,字节序,ABCD/BADC/CDAB/DCBA,Int32/Float等线上字节和数值一致,Framework API 与新服务对照通过（限定报告场景）,modbus-matrix.json：原 DLL / net481 API，非 EXE 按钮,modbus-matrix.json
+MB-020,字符串,编码、长度、反转、奇数长度,与原版结果一致,仅UTF-8已实现，待测,待采集,待采集
+MB-021,整数边界,Int16至UInt64上下界和越界,结果/拒绝与原版一致,待测,待采集,待采集
+MB-022,Bool,线圈/离散输入/写线圈,功能码、位序、返回一致,Framework API 与新服务对照通过（限定报告场景）,modbus-matrix.json：原 DLL / net481 API，非 EXE 按钮,modbus-matrix.json
+MB-023,浮点,Float/Double典型值和边界,字节序及数值一致,待测,待采集,待采集
+MB-024,轮询停止,启停与关闭窗口,停止完成后无新请求，无残留连接,待测,待采集,待采集
+MB-025,并发,轮询期间操作,请求不串线，状态一致,待测,待采集,待采集
+MB-026,重连,断网、恢复、重复连接,恢复/错误行为与原版一致,待测,待采集,待采集
+MB-027,原版配置文件,多设备、数据表、加密配置,完整恢复且原文件不损坏,未实现完整文件层,待采集,待采集
+MB-028,站号搜索,原版支持的范围和超时,结果一致，可取消,已实现；Word匹配即停/取消/恢复测试通过；Bool搜索和原版UI待测,待采集,modbus-matrix.json；screenshots/arc-station-search.png
+MB-029,特殊功能,ModbusControl各操作,参数与功能码对应一致,FC23已实现，Framework API报文/结果对照通过；UI交互待测,modbus-matrix.json：fc23,modbus-matrix.json；screenshots/arc-special.png
+MB-030,高级TCP,KeepAlive/本地绑定/重连/前置帧,行为和配置一致,未实现,待采集,待采集
+MB-031,其他管道,UDP/串口/SSL/DTU/MQTT等,每种管道按原版验证,未实现,待采集,待采集
+MB-032,数组表达式,"[1,2]、[1:100]、[1*100]",展开规则和报文一致,仅普通列表已实现,待采集,待采集
+MB-033,定时写,原版间隔和失败设置,时序与停止行为一致,未实现,待采集,待采集
+MB-034,批量数据表,配置、读写、恢复,数据与持久化一致,未实现,待采集,待采集
+MB-035,曲线与导出,采样、显示、导出,时间、值、文件语义一致,未实现,待采集,待采集
+MB-036,工具子标签,压力/模拟/远程/逻辑/示例,逐项按原版操作验收,未实现,待采集,待采集
+MB-037,界面检查,默认窗口和寄存器标签,无关键控件遮挡，未连接禁用读写,默认窗口已人工查看；缩放待测,待采集,待采集
+MB-038,长稳,验收工况8小时,无异常、死锁、持续资源增长,待测,待采集,待采集
