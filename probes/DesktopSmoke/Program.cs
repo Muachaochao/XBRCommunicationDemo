@@ -48,7 +48,14 @@ internal static class Program {
   vm.CurveSmooth=true;vm.CurveStrokeWidth=3;vm.CurveWindowMinutes="5";
   var curveChart=window.FindControl<LineChart>("CurveChart")!;
   if(curveChart.Series.Count!=2)throw new Exception($"Curve series count mismatch: {curveChart.Series.Count}");
-  foreach(var (index,name) in new[]{(3,"arc-special"),(4,"arc-station-search"),(5,"arc-batch-read"),(6,"arc-data-table"),(7,"arc-live-curve")}) {
+  vm.ProtocolSearch="Siemens";
+  if(vm.FilteredProtocols.Count!=1)throw new Exception("Protocol catalog search failed");
+  vm.SelectedProtocol=vm.FilteredProtocols[0];vm.OpenCatalogProtocolCommand.Execute(null);
+  if(vm.WorkspaceIndex!=9||vm.IndustrialProtocolIndex!=1||vm.IndustrialAddress!="M100")throw new Exception("Protocol navigation failed");
+  vm.ProtocolSearch="";
+  var sourceRow=SimulationRow.FromXml(System.Xml.Linq.XElement.Parse("<SimulateWrite Name='counter' Address='100' Time='100' Express='x * 10' Encoding='' Mark='test' Future='preserved'/>"));
+  if((string?)sourceRow.ToXml().Attribute("Future")!="preserved"||sourceRow.Definition().Expression!="x * 10")throw new Exception("Simulation XML roundtrip failed");
+  foreach(var (index,name) in new[]{(3,"arc-special"),(4,"arc-station-search"),(5,"arc-batch-read"),(6,"arc-data-table"),(7,"arc-live-curve"),(8,"arc-plc-simulator"),(9,"arc-industrial-plc"),(10,"arc-protocol-catalog")}) {
    tabs.SelectedIndex=index;Dispatcher.UIThread.RunJobs();AvaloniaHeadlessPlatform.ForceRenderTimerTick();Dispatcher.UIThread.RunJobs();
    if(index==7)
     for(var tick=0;tick<20;tick++){
@@ -64,6 +71,27 @@ internal static class Program {
    using var frame=window.CaptureRenderedFrame()??throw new Exception($"No frame at {name}");frame.Save($"docs/baseline/screenshots/{name}.png",new Avalonia.Media.Imaging.PngBitmapEncoderOptions());
   }
   vm.IsConnected=false;
-  Console.WriteLine($"Arc window rendered: register, FC23, search, batch parse/search/code, editable table, styled multi-series curve ({curveChart.Series.Count} series), minimum/expanded layout; states passed");window.Close();Dispatcher.UIThread.RunJobs();
+  int FreePort(){var listener=new System.Net.Sockets.TcpListener(System.Net.IPAddress.Loopback,0);listener.Start();var port=((System.Net.IPEndPoint)listener.LocalEndpoint).Port;listener.Stop();return port;}
+  void Pump(int milliseconds){var end=DateTime.UtcNow.AddMilliseconds(milliseconds);while(DateTime.UtcNow<end){Dispatcher.UIThread.RunJobs();Thread.Sleep(5);}}
+  void Execute(CommunityToolkit.Mvvm.Input.IAsyncRelayCommand command){
+   var task=command.ExecuteAsync(null);var deadline=DateTime.UtcNow.AddSeconds(8);
+   while(!task.IsCompleted&&DateTime.UtcNow<deadline)Pump(10);
+   if(!task.IsCompleted)throw new Exception("ViewModel command timed out");
+   task.GetAwaiter().GetResult();Dispatcher.UIThread.RunJobs();
+  }
+  vm.IndustrialPort=FreePort().ToString();
+  Execute(vm.StartIndustrialServerCommand);Execute(vm.ConnectIndustrialCommand);
+  if(!vm.IndustrialConnected||!vm.IndustrialServerRunning||vm.CanChangeIndustrial)throw new Exception("Industrial VM connection flags failed");
+  vm.IndustrialType="Int16";vm.IndustrialValue="123";Execute(vm.WriteIndustrialCommand);Execute(vm.ReadIndustrialCommand);
+  if(vm.IndustrialResult!="123")throw new Exception("Industrial VM write/read failed: "+vm.IndustrialResult);
+  Execute(vm.StopIndustrialServerCommand);
+  if(!vm.CanChangeIndustrial)throw new Exception("Industrial VM stop failed");
+  vm.ServerPort=FreePort().ToString();Execute(vm.StartServerCommand);vm.UseSimulatorAsClientCommand.Execute(null);
+  Execute(vm.ConnectCommand);Execute(vm.StartSimulationCommand);Pump(350);
+  vm.DataType="Int64";vm.Length="1";Execute(vm.ReadCommand);
+  if(!long.TryParse(vm.Result,out var counter)||counter<=0)throw new Exception("Modbus simulation VM read failed: "+vm.Result);
+  Execute(vm.StopSimulationCommand);Execute(vm.DisconnectCommand);Execute(vm.StopServerCommand);
+  if(vm.IsConnected||vm.IsServerRunning||vm.IsSimulating)throw new Exception("Modbus VM cleanup failed");
+  Console.WriteLine($"Arc window rendered including simulator/industrial/catalog; XML, navigation, layout, real ViewModel Modbus simulation and S7 loopback passed");window.Close();Dispatcher.UIThread.RunJobs();
  }
 }

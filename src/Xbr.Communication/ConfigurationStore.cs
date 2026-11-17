@@ -12,7 +12,8 @@ public static class ConfigurationStore
             ["ConnectTimeOut"]=o.ConnectTimeout,["ReceiveTimeOut"]=o.ReceiveTimeout,["Station"]=o.Station,
             ["AddressStartWithZero"]=o.AddressStartWithZero,["DataFormat"]=o.DataFormat,["StringReverse"]=o.StringReverse,
             ["StationCheckMatch"]=o.StationCheck,["DisableFunctionCode06"]=o.DisableFunctionCode06,
-            ["BroadcastStation"]=o.BroadcastStation==-1?"":o.BroadcastStation.ToString(),["WordReadBatchLength"]=o.WordReadBatchLength
+            ["BroadcastStation"]=o.BroadcastStation==-1?"":o.BroadcastStation.ToString(),["WordReadBatchLength"]=o.WordReadBatchLength,
+            ["AddressMapping"]=o.AddressMapping
         }) e.SetAttributeValue(pair.Key,pair.Value);
         return e;
     }
@@ -27,6 +28,6 @@ public static class ConfigurationStore
             DataFormat=Optional("DataFormat",2),AddressStartWithZero=bool.Parse(Get("AddressStartWithZero","true")),
             StringReverse=bool.Parse(Get("StringReverse","false")),StationCheck=bool.Parse(Get("StationCheckMatch","true")),
             DisableFunctionCode06=bool.Parse(Get("DisableFunctionCode06","false")),BroadcastStation=Optional("BroadcastStation",-1),
-            WordReadBatchLength=Optional("WordReadBatchLength",120) }; o.Validate(); return o;
+            WordReadBatchLength=Optional("WordReadBatchLength",120),AddressMapping=Get("AddressMapping","No Address Mapping") }; o.Validate(); return o;
     }
 }

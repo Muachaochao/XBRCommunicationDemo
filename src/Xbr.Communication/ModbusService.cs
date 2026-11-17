@@ -21,6 +21,7 @@ public sealed partial class ModbusService
             StationCheckMatch=options.StationCheck, DisableFunctionCode06=options.DisableFunctionCode06,
             BroadcastStation=options.BroadcastStation, WordReadBatchLength=options.WordReadBatchLength
         };
+        next.RegisteredAddressMapping(ModbusAddressMappings.Resolve(options.AddressMapping));
         var result=next.ConnectServer();
         if(!result.IsSuccess) { next.ConnectClose(); Check(result); }
         client=next; return true;

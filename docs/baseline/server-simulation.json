@@ -1,0 +1,477 @@
+{
+  "passed": true,
+  "total": 61,
+  "failures": 0,
+  "checks": [
+    {
+      "name": "Modbus expression simulation and cancellation",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Modbus client write/read",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Modbus simulation stops on first write failure",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Modbus mapping: No Address Mapping",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Modbus mapping: Inovance AM",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Modbus mapping: Inovance H3U",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Modbus mapping: Inovance H5U/Easy",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Modbus mapping: Inovance EVO",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Modbus mapping: Delta AS",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Modbus mapping: Delta DVP",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Modbus mapping: MegMeet",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Modbus mapping: XinJE XC",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Modbus mapping: XinJE XD/XL",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Modbus mapping: WeCon LX5V",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Modbus mapping: INVT TS",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Modbus remote writes disabled",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Mitsubishi MC 3E Binary connect native HSL simulator",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Mitsubishi MC 3E Binary Int16 -123",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Mitsubishi MC 3E Binary UInt16 54321",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Mitsubishi MC 3E Binary Int32 -123456",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Mitsubishi MC 3E Binary UInt32 3234567890",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Mitsubishi MC 3E Binary Int64 -1234567890123",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Mitsubishi MC 3E Binary UInt64 12345678901234",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Mitsubishi MC 3E Binary Float 12.5",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Mitsubishi MC 3E Binary Double -1234.125",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Mitsubishi MC 3E Binary Int16 [1,-2,3]",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Mitsubishi MC 3E Binary Float [1.25,-2.5,3.75]",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Mitsubishi MC 3E Binary Bool array",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Mitsubishi MC 3E Binary UTF-8 string",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Mitsubishi MC 3E Binary data pool save/restore",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Mitsubishi MC 3E Binary invalid address",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Siemens S7-1200 connect native HSL simulator",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Siemens S7-1200 Int16 -123",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Siemens S7-1200 UInt16 54321",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Siemens S7-1200 Int32 -123456",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Siemens S7-1200 UInt32 3234567890",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Siemens S7-1200 Int64 -1234567890123",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Siemens S7-1200 UInt64 12345678901234",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Siemens S7-1200 Float 12.5",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Siemens S7-1200 Double -1234.125",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Siemens S7-1200 Int16 [1,-2,3]",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Siemens S7-1200 Float [1.25,-2.5,3.75]",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Siemens S7-1200 Bool array",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Siemens S7-1200 UTF-8 string",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Siemens S7-1200 data pool save/restore",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Siemens S7-1200 invalid address",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Omron FINS TCP connect native HSL simulator",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Omron FINS TCP Int16 -123",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Omron FINS TCP UInt16 54321",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Omron FINS TCP Int32 -123456",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Omron FINS TCP UInt32 3234567890",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Omron FINS TCP Int64 -1234567890123",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Omron FINS TCP UInt64 12345678901234",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Omron FINS TCP Float 12.5",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Omron FINS TCP Double -1234.125",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Omron FINS TCP Int16 [1,-2,3]",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Omron FINS TCP Float [1.25,-2.5,3.75]",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Omron FINS TCP Bool array",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Omron FINS TCP UTF-8 string",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Omron FINS TCP data pool save/restore",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Omron FINS TCP invalid address",
+      "passed": true,
+      "error": ""
+    }
+  ],
+  "receivedFrames": 108,
+  "messages": [
+    "Modbus TCP \u670D\u52A1\u7AEF\u5DF2\u542F\u52A8\uFF0C\u7AEF\u53E3 65370",
+    "\u6A21\u62DF\u5199\u5165\u5DF2\u505C\u6B62",
+    "\u6A21\u62DF\u5199\u5165\u5DF2\u542F\u52A8\uFF0C\u5171 2 \u9879",
+    "\u5BA2\u6237\u7AEF\u62A5\u6587 000000000006010300640004",
+    "\u6A21\u62DF\u5199\u5165\u5DF2\u505C\u6B62",
+    "\u5BA2\u6237\u7AEF\u62A5\u6587 000100000006010300640004",
+    "\u5BA2\u6237\u7AEF\u62A5\u6587 000200000006010300640004",
+    "\u5BA2\u6237\u7AEF\u62A5\u6587 000300000006010600C810E1",
+    "\u5BA2\u6237\u7AEF\u62A5\u6587 000400000006010300C80001",
+    "\u6A21\u62DF\u5199\u5165\u5DF2\u505C\u6B62",
+    "\u6A21\u62DF\u5199\u5165\u5DF2\u542F\u52A8\uFF0C\u5171 2 \u9879",
+    "\u6A21\u62DF\u5199\u5165\u5DF2\u505C\u6B62",
+    "\u5BA2\u6237\u7AEF\u62A5\u6587 000500000006010300DC0001",
+    "\u6A21\u62DF\u5199\u5165\u5DF2\u505C\u6B62",
+    "Modbus \u670D\u52A1\u7AEF\u5DF2\u505C\u6B62",
+    "Modbus TCP \u670D\u52A1\u7AEF\u5DF2\u542F\u52A8\uFF0C\u7AEF\u53E3 65372",
+    "\u5BA2\u6237\u7AEF\u62A5\u6587 0000000000060106006409A4",
+    "\u5BA2\u6237\u7AEF\u62A5\u6587 000100000006010300640001",
+    "\u6A21\u62DF\u5199\u5165\u5DF2\u505C\u6B62",
+    "Modbus \u670D\u52A1\u7AEF\u5DF2\u505C\u6B62",
+    "Modbus TCP \u670D\u52A1\u7AEF\u5DF2\u542F\u52A8\uFF0C\u7AEF\u53E3 65374",
+    "\u5BA2\u6237\u7AEF\u62A5\u6587 0000000000060106006409A4",
+    "\u5BA2\u6237\u7AEF\u62A5\u6587 000100000006010300640001",
+    "\u6A21\u62DF\u5199\u5165\u5DF2\u505C\u6B62",
+    "Modbus \u670D\u52A1\u7AEF\u5DF2\u505C\u6B62",
+    "Modbus TCP \u670D\u52A1\u7AEF\u5DF2\u542F\u52A8\uFF0C\u7AEF\u53E3 65376",
+    "\u5BA2\u6237\u7AEF\u62A5\u6587 0000000000060106006409A4",
+    "\u5BA2\u6237\u7AEF\u62A5\u6587 000100000006010300640001",
+    "\u6A21\u62DF\u5199\u5165\u5DF2\u505C\u6B62",
+    "Modbus \u670D\u52A1\u7AEF\u5DF2\u505C\u6B62",
+    "Modbus TCP \u670D\u52A1\u7AEF\u5DF2\u542F\u52A8\uFF0C\u7AEF\u53E3 65378",
+    "\u5BA2\u6237\u7AEF\u62A5\u6587 0000000000060106006409A4",
+    "\u5BA2\u6237\u7AEF\u62A5\u6587 000100000006010300640001",
+    "\u6A21\u62DF\u5199\u5165\u5DF2\u505C\u6B62",
+    "Modbus \u670D\u52A1\u7AEF\u5DF2\u505C\u6B62",
+    "Modbus TCP \u670D\u52A1\u7AEF\u5DF2\u542F\u52A8\uFF0C\u7AEF\u53E3 65380",
+    "\u5BA2\u6237\u7AEF\u62A5\u6587 0000000000060106006409A4",
+    "\u5BA2\u6237\u7AEF\u62A5\u6587 000100000006010300640001",
+    "\u6A21\u62DF\u5199\u5165\u5DF2\u505C\u6B62",
+    "Modbus \u670D\u52A1\u7AEF\u5DF2\u505C\u6B62",
+    "Modbus TCP \u670D\u52A1\u7AEF\u5DF2\u542F\u52A8\uFF0C\u7AEF\u53E3 65382",
+    "\u5BA2\u6237\u7AEF\u62A5\u6587 0000000000060106006409A4",
+    "\u5BA2\u6237\u7AEF\u62A5\u6587 000100000006010300640001",
+    "\u6A21\u62DF\u5199\u5165\u5DF2\u505C\u6B62",
+    "Modbus \u670D\u52A1\u7AEF\u5DF2\u505C\u6B62",
+    "Modbus TCP \u670D\u52A1\u7AEF\u5DF2\u542F\u52A8\uFF0C\u7AEF\u53E3 65384",
+    "\u5BA2\u6237\u7AEF\u62A5\u6587 0000000000060106106409A4",
+    "\u5BA2\u6237\u7AEF\u62A5\u6587 000100000006010310640001",
+    "\u6A21\u62DF\u5199\u5165\u5DF2\u505C\u6B62",
+    "Modbus \u670D\u52A1\u7AEF\u5DF2\u505C\u6B62",
+    "Modbus TCP \u670D\u52A1\u7AEF\u5DF2\u542F\u52A8\uFF0C\u7AEF\u53E3 65386",
+    "\u5BA2\u6237\u7AEF\u62A5\u6587 0000000000060106006409A4",
+    "\u5BA2\u6237\u7AEF\u62A5\u6587 000100000006010300640001",
+    "\u6A21\u62DF\u5199\u5165\u5DF2\u505C\u6B62",
+    "Modbus \u670D\u52A1\u7AEF\u5DF2\u505C\u6B62",
+    "Modbus TCP \u670D\u52A1\u7AEF\u5DF2\u542F\u52A8\uFF0C\u7AEF\u53E3 65388",
+    "\u5BA2\u6237\u7AEF\u62A5\u6587 0000000000060106006409A4",
+    "\u5BA2\u6237\u7AEF\u62A5\u6587 000100000006010300640001",
+    "\u6A21\u62DF\u5199\u5165\u5DF2\u505C\u6B62",
+    "Modbus \u670D\u52A1\u7AEF\u5DF2\u505C\u6B62",
+    "Modbus TCP \u670D\u52A1\u7AEF\u5DF2\u542F\u52A8\uFF0C\u7AEF\u53E3 65390",
+    "\u5BA2\u6237\u7AEF\u62A5\u6587 0000000000060106006409A4",
+    "\u5BA2\u6237\u7AEF\u62A5\u6587 000100000006010300640001",
+    "\u6A21\u62DF\u5199\u5165\u5DF2\u505C\u6B62",
+    "Modbus \u670D\u52A1\u7AEF\u5DF2\u505C\u6B62",
+    "Modbus TCP \u670D\u52A1\u7AEF\u5DF2\u542F\u52A8\uFF0C\u7AEF\u53E3 65392",
+    "\u5BA2\u6237\u7AEF\u62A5\u6587 0000000000060106106409A4",
+    "\u5BA2\u6237\u7AEF\u62A5\u6587 000100000006010310640001",
+    "\u6A21\u62DF\u5199\u5165\u5DF2\u505C\u6B62",
+    "Modbus \u670D\u52A1\u7AEF\u5DF2\u505C\u6B62",
+    "Modbus TCP \u670D\u52A1\u7AEF\u5DF2\u542F\u52A8\uFF0C\u7AEF\u53E3 65394",
+    "\u5BA2\u6237\u7AEF\u62A5\u6587 0000000000060106006409A4",
+    "\u5BA2\u6237\u7AEF\u62A5\u6587 000100000006010300640001",
+    "\u6A21\u62DF\u5199\u5165\u5DF2\u505C\u6B62",
+    "Modbus \u670D\u52A1\u7AEF\u5DF2\u505C\u6B62",
+    "Modbus TCP \u670D\u52A1\u7AEF\u5DF2\u542F\u52A8\uFF0C\u7AEF\u53E3 65396",
+    "\u5BA2\u6237\u7AEF\u62A5\u6587 00000000000601060064007B",
+    "\u6A21\u62DF\u5199\u5165\u5DF2\u505C\u6B62",
+    "Modbus \u670D\u52A1\u7AEF\u5DF2\u505C\u6B62",
+    "Mitsubishi MC 3E Binary \u6A21\u62DF\u670D\u52A1\u7AEF :65398",
+    "\u5DF2\u8FDE\u63A5 Mitsubishi MC 3E Binary 127.0.0.1:65398",
+    "RX 500000FFFF03000E000A0001140000640000A8010085FF",
+    "RX 500000FFFF03000C000A0001040000640000A80100",
+    "RX 500000FFFF03000E000A0001140000640000A8010031D4",
+    "RX 500000FFFF03000C000A0001040000640000A80100",
+    "RX 500000FFFF030010000A0001140000640000A80200C01DFEFF",
+    "RX 500000FFFF03000C000A0001040000640000A80200",
+    "RX 500000FFFF030010000A0001140000640000A80200D296CBC0",
+    "RX 500000FFFF03000C000A0001040000640000A80200",
+    "RX 500000FFFF030014000A0001140000640000A8040035FB048EE0FEFFFF",
+    "RX 500000FFFF03000C000A0001040000640000A80400",
+    "RX 500000FFFF030014000A0001140000640000A80400F22FCE733A0B0000",
+    "RX 500000FFFF03000C000A0001040000640000A80400",
+    "RX 500000FFFF030010000A0001140000640000A8020000004841",
+    "RX 500000FFFF03000C000A0001040000640000A80200",
+    "RX 500000FFFF030014000A0001140000640000A8040000000000804893C0",
+    "RX 500000FFFF03000C000A0001040000640000A80400",
+    "RX 500000FFFF030012000A0001140000640000A803000100FEFF0300",
+    "RX 500000FFFF03000C000A0001040000640000A80300",
+    "RX 500000FFFF030018000A0001140000640000A806000000A03F000020C000007040",
+    "RX 500000FFFF03000C000A0001040000640000A80600",
+    "RX 500000FFFF03000E000A00011401006400009003001010",
+    "RX 500000FFFF03000C000A0001040100640000900300",
+    "RX 500000FFFF030012000A0001140000640000A8030048454C4C4F21",
+    "RX 500000FFFF03000C000A0001040000640000A80300",
+    "RX 500000FFFF03000C000A0001040000640000A80100",
+    "Siemens S7-1200 \u6A21\u62DF\u670D\u52A1\u7AEF :65400",
+    "\u5DF2\u8FDE\u63A5 Siemens S7-1200 127.0.0.1:65400",
+    "RX 0300002502F080320100000001000E00060501120A1002000200008300032000040010FF85",
+    "RX 0300001F02F080320100000002000E00000401120A10020002000083000320",
+    "RX 0300002502F080320100000003000E00060501120A1002000200008300032000040010D431",
+    "RX 0300001F02F080320100000004000E00000401120A10020002000083000320",
+    "RX 0300002702F080320100000005000E00080501120A1002000400008300032000040020FFFE1DC0",
+    "RX 0300001F02F080320100000006000E00000401120A10020004000083000320",
+    "RX 0300002702F080320100000007000E00080501120A1002000400008300032000040020C0CB96D2",
+    "RX 0300001F02F080320100000008000E00000401120A10020004000083000320",
+    "RX 0300002B02F080320100000009000E000C0501120A1002000800008300032000040040FFFFFEE08E04FB35",
+    "RX 0300001F02F08032010000000A000E00000401120A10020008000083000320",
+    "RX 0300002B02F08032010000000B000E000C0501120A100200080000830003200004004000000B3A73CE2FF2",
+    "RX 0300001F02F08032010000000C000E00000401120A10020008000083000320",
+    "RX 0300002702F08032010000000D000E00080501120A100200040000830003200004002041480000",
+    "RX 0300001F02F08032010000000E000E00000401120A10020004000083000320",
+    "RX 0300002B02F08032010000000F000E000C0501120A1002000800008300032000040040C093488000000000",
+    "RX 0300001F02F080320100000010000E00000401120A10020008000083000320",
+    "RX 0300002902F080320100000011000E000A0501120A10020006000083000320000400300001FFFE0003",
+    "RX 0300001F02F080320100000012000E00000401120A10020006000083000320",
+    "RX 0300002F02F080320100000013000E00100501120A1002000C000083000320000400603FA00000C020000040700000",
+    "RX 0300001F02F080320100000014000E00000401120A1002000C000083000320",
+    "RX 0300001F02F080320100000015000E00000401120A10020001000083000640",
+    "RX 0300002402F080320100000016000E00050501120A100200010000830006400004000805",
+    "RX 0300001F02F080320100000017000E00000401120A10020001000083000640",
+    "RX 0300001F02F080320100000018000E00000401120A10020002000083000320",
+    "RX 0300002B02F080320100000019000E000C0501120A10020008000083000320000400403F0648454C4C4F21",
+    "RX 0300001F02F08032010000001A000E00000401120A10020006000083000330",
+    "RX 0300001F02F08032010000001B000E00000401120A10020002000083000320",
+    "Omron FINS TCP \u6A21\u62DF\u670D\u52A1\u7AEF :65402",
+    "\u5DF2\u8FDE\u63A5 Omron FINS TCP 127.0.0.1:65402",
+    "RX 46494E530000001C0000000200000000800002000200000100000102820064000001FF85",
+    "RX 46494E530000001A0000000200000000800002000200000100010101820064000001",
+    "RX 46494E530000001C0000000200000000800002000200000100020102820064000001D431",
+    "RX 46494E530000001A0000000200000000800002000200000100030101820064000001",
+    "RX 46494E530000001E00000002000000008000020002000001000401028200640000021DC0FFFE",
+    "RX 46494E530000001A0000000200000000800002000200000100050101820064000002",
+    "RX 46494E530000001E000000020000000080000200020000010006010282006400000296D2C0CB",
+    "RX 46494E530000001A0000000200000000800002000200000100070101820064000002",
+    "RX 46494E53000000220000000200000000800002000200000100080102820064000004FB358E04FEE0FFFF",
+    "RX 46494E530000001A0000000200000000800002000200000100090101820064000004",
+    "RX 46494E530000002200000002000000008000020002000001000A01028200640000042FF273CE0B3A0000",
+    "RX 46494E530000001A00000002000000008000020002000001000B0101820064000004",
+    "RX 46494E530000001E00000002000000008000020002000001000C010282006400000200004148",
+    "RX 46494E530000001A00000002000000008000020002000001000D0101820064000002",
+    "RX 46494E530000002200000002000000008000020002000001000E0102820064000004000000004880C093",
+    "RX 46494E530000001A00000002000000008000020002000001000F0101820064000004",
+    "RX 46494E530000002000000002000000008000020002000001001001028200640000030001FFFE0003",
+    "RX 46494E530000001A0000000200000000800002000200000100110101820064000003",
+    "RX 46494E5300000026000000020000000080000200020000010012010282006400000600003FA00000C02000004070",
+    "RX 46494E530000001A0000000200000000800002000200000100130101820064000006",
+    "RX 46494E530000001D00000002000000008000020002000001001401020200C8000003010001",
+    "RX 46494E530000001A00000002000000008000020002000001001501010200C8000003",
+    "RX 46494E5300000020000000020000000080000200020000010016010282006400000345484C4C214F",
+    "RX 46494E530000001A0000000200000000800002000200000100170101820064000003",
+    "RX 46494E530000001A0000000200000000800002000200000100180101820064000001"
+  ]
+}

@@ -74,3 +74,7 @@ Avalonia 桌面构建 0 错误、0 警告；DesktopSmoke 在 Skia 路径渲染�
 第五轮：批量解析子表、正则/文本搜索、解析代码示例、数据表双击写入回读、曲线颜色/虚线/平滑/线宽/时间窗已迁移。监控集成扩展到 15 项并全部通过；新增 5000 轮截断、批量解析值/代码和多种表格写值场景。证据仍为 baseline/monitoring-integration.json。
 新增 `MonitoringSoak`：10 连接 × 20 点位 × 500ms 运行 10 秒，完成 200 轮、4000 请求、0 失败，P95 11.10ms，进程工作集约 65.3MB，结果见 baseline/monitoring-soak.json。
 DesktopSmoke 增加批量解析/搜索/代码与曲线样式状态，并输出最小 1000×700、扩展 1600×1000 两种布局截图。短时压力与两种布局不能替代 8 小时稳定性以及 Windows 100%/125%/150%/200% DPI 实机验收；原版 EXE 同步交互和真实 Modbus TCP 设备仍需外部环境。
+
+第六轮：依据用户无实物的条件，使用原版 HSL 的 Modbus、MelsecMcServer、SiemensS7Server、OmronFinsServer 完成本机 TCP 读写验收，后续迁移不等待硬件。新增 61 项服务端检查全部通过，覆盖模拟循环/取消/首错停止、12 个地址映射选项、远程禁写、MC/S7/FINS 类型与数组、字符串、非法地址及数据池恢复。证据：baseline/server-simulation.json。原有协议矩阵 23 项和监控 15 项重新回归；各探针只能证明列出的场景。
+
+桌面增加 PLC 模拟器、工业 PLC 和协议目录页面，DesktopSmoke 验证目录搜索/导航、SimulateWrite XML 未知属性保留，并渲染新增页面。新增基础 PLC 页面尚未接入其专用路由参数、点表和曲线；机器人页面尚未迁移。不能据此宣称全部一比一完成。详见 PLC-MIGRATION.md。

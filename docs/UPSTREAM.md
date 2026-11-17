@@ -21,6 +21,10 @@ TKCode.Arc 为独立 MIT 组件，声明保存在 docs/third-party。
 | 普通读写、编码与数组表达式 | HslCommunicationDemo/DemoControl/UserControlReadWriteOp.cs |
 | 批量读写、按字反转与行宽 | HslCommunicationDemo/DemoControl/BatchReadControl.cs |
 | 数据表、表达式、曲线与导出 | HslCommunicationDemo/DemoControl/DataTableControl.cs、DataTableItem.cs、FormCurveMonitor.cs |
+| Modbus 服务端与模拟写入 | HslCommunicationDemo/Modbus/FormModbusServer.cs、DemoControl/DataSimulateControl.cs |
+| MC 3E 客户端/服务端 | HslCommunicationDemo/PLC/Melsec/FormMelsecBinary.cs、FormMcServer.cs |
+| S7 客户端/服务端 | HslCommunicationDemo/PLC/Siemens/FormSiemens.cs、FormS7Server.cs |
+| FINS TCP 客户端/服务端 | HslCommunicationDemo/PLC/Omron/FormOmron.cs、FormOmronServer.cs |
 
 后续优先从上述官方源码迁移；此前反编译目录只在本地留作 v13.0.3 对照，不加入公开提交。
 本轮未改变已验证的 HSL 13.0.3 二进制依赖，避免切换版本造成行为漂移。依赖由使用者在本机提供，不新增上传通信 DLL、反编译源码、配置或授权信息。
@@ -30,3 +34,5 @@ TKCode.Arc 为独立 MIT 组件，声明保存在 docs/third-party。
 Arc 深色页面、基础类型读写、原始报文、轮询、单设备明文配置、FC23、站号搜索、批量解析/搜索/代码示例、表格双击写值和可配置曲线已接入。
 23 项协议矩阵与 15 项监控集成场景通过；前者比较旧 DLL 请求/响应，后者覆盖表格、编码、取消、锁和曲线历史。10 连接短时压力探针也已通过。
 尚待：原版 EXE 同步骤交互采集、真实设备、8 小时长稳、操作系统 DPI 实机检查、导出格式扩展、其他管道与完整设备矩阵。
+
+第六轮增加四种原生 PLC 模拟服务端闭环和协议目录。无实物时继续以官方模拟服务端验收，不将真实设备作为后续开发前置条件。61 项检查及实际 TCP 接收帧保存在 `baseline/server-simulation.json`，详细完成范围和差异见 `PLC-MIGRATION.md`。

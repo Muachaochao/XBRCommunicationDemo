@@ -16,6 +16,9 @@
 - 官方 `DataTableItem` XML、混合标量/数组/表达式、失败行继续、六种字符串编码和 CSV 历史。
 - 数据表当前值双击写入并回读；Arc 多曲线颜色、虚线、平滑/直线、线宽和时间窗。
 - 15 项监控集成、23 项协议矩阵和 10 连接 × 20 点位 × 500ms 压力探针通过。
+- 内置 Modbus 模拟服务端、12 个地址映射选项、表达式模拟写入和官方 `SimulateWrite` XML 导入导出。
+- 三菱 MC 3E Binary、西门子 S7-1200、欧姆龙 FINS TCP 客户端与原生模拟服务端：基础类型/数组读写、服务端本地内存、数据池保存恢复。
+- 协议目录检索和页面导航；新增模拟服务端闭环 61 项测试通过。官方相关功能窗体清单共 189 个，见 [迁移清单](docs/PLC-MIGRATION.md)。
 
 **迁移进行中，尚未实现原版全部页面和功能，也未完成真机验收。**
 
@@ -34,6 +37,7 @@ dotnet run --project src/Xbr.Desktop
 dotnet build probes/LegacyModbus
 dotnet run --project probes/ModbusMatrix
 dotnet run --project probes/MonitoringIntegration
+dotnet run --project probes/ServerSimulationIntegration
 dotnet run --project probes/MonitoringSoak -- 10 10 20 500
 dotnet run --project probes/DesktopSmoke
 ```
@@ -58,4 +62,4 @@ TKCode.Arc 的 MIT 许可及 notices 位于 [docs/third-party](docs/third-party)
 
 ## 下一步
 
-先补批量解析面板、双击表格写值、曲线样式/时间窗和原版 EXE 同步骤交互对照；随后推进其他管道与协议页面。
+以原版虚拟 PLC 服务端作为无实物验收基线，继续补 MC/S7/FINS 专用参数、批量/点表/曲线和模拟写入；随后迁移 ABB/FANUC/KUKA 等机械手专用读写页面。按原版调用、默认参数、返回值和报文逐项对照，不将目录入口计为功能完成。
